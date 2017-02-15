@@ -11,26 +11,22 @@ namespace Day1Hash
     class Program
     {
 
-        static string Encrypt256(string input)
-        {
-            string output;
-            byte[] byteData = Encoding.ASCII.GetBytes(input);
-            Stream inputStream = new MemoryStream(byteData);
-
-            using (SHA256 shaM = new SHA256Managed())
-            {
-                var result = shaM.ComputeHash(inputStream);
-                output = BitConverter.ToString(result);
-            }
-            return output.Replace("-", "").Substring(0, 5);
-        }
-
         static void Main(string[] args)
         {
             while (true)
             {
                 var myInput = Console.ReadLine();
-                Console.WriteLine(Encrypt256(myInput));
+                string output;
+                byte[] byteData = Encoding.ASCII.GetBytes(myInput);
+                Stream inputStream = new MemoryStream(byteData);
+
+                using (SHA256 shaM = new SHA256Managed())
+                {
+                    var result = shaM.ComputeHash(inputStream);
+                    output = BitConverter.ToString(result);
+                }
+                output = output.Replace("-", "").Substring(0, 5);
+                Console.WriteLine(output);
             }
 
             // Step 1 Take user input
