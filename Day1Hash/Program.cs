@@ -16,16 +16,7 @@ namespace Day1Hash
             while (true)
             {
                 var myInput = Console.ReadLine();
-                string output;
-                byte[] byteData = Encoding.ASCII.GetBytes(myInput);
-                Stream inputStream = new MemoryStream(byteData);
-
-                using (SHA256 shaM = new SHA256Managed())
-                {
-                    var result = shaM.ComputeHash(inputStream);
-                    output = BitConverter.ToString(result);
-                }
-                output = output.Replace("-", "").Substring(0, 5);
+                string output = Encryptor.MakeSha256(myInput);
                 Console.WriteLine(output);
             }
 
